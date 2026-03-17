@@ -105,9 +105,8 @@ app.post('/api/v1/trading/analyze', async (req, res) => {
 app.get('/api/test', (req, res) => {
     res.json({ 
         status: 'ok', 
-        message: '交易冷静器后端运行正常！',
-        nodeVersion: process.version, 
-        environment: isVercel ? 'Vercel' : 'Local' 
+        message: `后端运行中！当前Node版本：${process.version}，环境：${isVercel ? '云端Vercel' : '本地开发'}`,
+        debug_info: "如果你能看到这段文字，说明代码更新成功了！"
     });
 });
 // 6. 启动 (非 Vercel 环境下)
