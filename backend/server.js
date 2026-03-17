@@ -101,11 +101,12 @@ app.post('/api/v1/trading/analyze', async (req, res) => {
 });
 
 // 5. 健康检查路由
-
+// 检查这一段，必须包含 nodeVersion
 app.get('/api/test', (req, res) => {
     res.json({ 
         status: 'ok', 
-        nodeVersion: process.version, // 👈 这一行能告诉你真相
+        message: '交易冷静器后端运行正常！',
+        nodeVersion: process.version, 
         environment: isVercel ? 'Vercel' : 'Local' 
     });
 });
