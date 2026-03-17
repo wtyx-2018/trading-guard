@@ -39,7 +39,7 @@ const deepseekClient = new OpenAI({
 
 // Gemini 客户端
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const geminiModel = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
 // 4. 业务路由：情绪分析与交易阻断
 app.post('/api/v1/trading/analyze', async (req, res) => {
