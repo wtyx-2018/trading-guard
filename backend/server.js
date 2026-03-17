@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { setGlobalDispatcher, ProxyAgent } from 'undici';
-
+import { setDefaultResultOrder } from 'node:dns';
+setDefaultResultOrder('ipv4first'); // 强制优先使用 IPv4，解决 Vercel 节点解析 Google API 超时的问题
 // 1. 基础配置
 dotenv.config();
 const app = express();
@@ -100,10 +101,14 @@ app.post('/api/v1/trading/analyze', async (req, res) => {
 });
 
 // 5. 健康检查路由
-app.get('/api/test', (req, res) => {
-    res.json({ status: 'ok', environment: isVercel ? 'Vercel' : 'Local' });
-});
 
+app.get('/api/test', (req, res) => {
+    res.json({ 
+        status: 'ok', 
+        nodeVersion: process.version, // 👈 这一行能告诉你真相
+        environment: isVercel ? 'Vercel' : 'Local' 
+    });
+});
 // 6. 启动 (非 Vercel 环境下)
 if (!isVercel) {
     const PORT = process.env.PORT || 3000;
