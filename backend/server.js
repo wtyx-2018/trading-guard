@@ -3,11 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { setGlobalDispatcher, ProxyAgent } from 'undici';
+// import { setGlobalDispatcher, ProxyAgent } from 'undici';
 
 // 强制 Node.js 全局 fetch 走本地代理端口 (例如 Clash 默认是 7890)
-const proxyAgent = new ProxyAgent('http://127.0.0.1:7890');
-setGlobalDispatcher(proxyAgent);
+// const proxyAgent = new ProxyAgent('http://127.0.0.1:7890');
+// setGlobalDispatcher(proxyAgent);
 
 // 加载环境变量
 dotenv.config();
