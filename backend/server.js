@@ -115,8 +115,18 @@ app.post('/api/v1/trading/analyze', async (req, res) => {
     }
 });
 
-// 4. 启动服务器
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 服务已启动: http://localhost:${PORT}`);
-});
+// // 4. 启动服务器
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`🚀 服务已启动: http://localhost:${PORT}`);
+// });
+// 4. 启动服务器 (兼容 Vercel Serverless)
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`🚀 服务已启动: http://localhost:${PORT}`);
+    });
+}
+
+// 供 Vercel Serverless 函数调用
+export default app;
